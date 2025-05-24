@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GundoList - Hard Tech Companies</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GundoList</h1>
+            <div class="filter-container">
+                <select id="locationFilter">
+                    <option value="all">All Locations</option>
+                    <option value="El Segundo">El Segundo</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="San Francisco">San Francisco</option>
+                    <option value="Boston">Boston</option>
+                    <option value="Austin">Austin</option>
+                </select>
+            </div>
+        </header>
+        
+        <main class="companies-grid" id="companiesGrid">
+            <!-- Companies will be dynamically inserted here -->
+        </main>
+    </div>
+    <script src="src/script.js"></script>
+</body>
+</html>
