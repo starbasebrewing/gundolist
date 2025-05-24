@@ -73,7 +73,7 @@ function createCompanyCard(company) {
                 <p class="company-details">${company.focus} • ${company.location}</p>
                 <div class="social-links">
                     <a href="${company.url}" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
-                    <a href="${company.xLink}" target="_blank" title="X"><i class="fab fa-twitter"></i></a>
+                    <a href="${company.xLink}" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="${company.jobsPage}" target="_blank" title="Careers"><i class="fas fa-briefcase"></i></a>
                 </div>
             </div>
