@@ -30,8 +30,8 @@ function getSortedLocations(companies) {
     
     return locations.sort((a, b) => {
         // El Segundo always first
-        if (a === 'El Segundo') return -1;
-        if (b === 'El Segundo') return 1;
+        if (a === 'El Segundo, CA') return -1;
+        if (b === 'El Segundo, CA') return 1;
         
         // Check if locations are in California
         const aIsCA = a.endsWith(', CA');
@@ -78,7 +78,10 @@ function createCompanyCard(company) {
             </div>
             <div class="company-info">
                 <h3 class="company-name">${company.name}</h3>
-                <p class="company-details">${company.focus} • ${company.location}</p>
+                <div class="company-details">
+                    <span>${company.focus}</span>
+                    <span>${company.location}</span>
+                </div>
                 <div class="social-links">
                     <a href="${company.url}" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
                     <a href="${company.xLink}" target="_blank" title="X"><i class="ri-twitter-x-fill"></i></a>
