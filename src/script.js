@@ -25,6 +25,43 @@ async function fetchCompaniesData() {
     }
 }
 
+function getSortedLocations(companies) {
+    const locations = [...new Set(companies.map(company => company.location))];
+    
+    return locations.sort((a, b) => {
+        // El Segundo always first
+        if (a === 'El Segundo') return -1;
+        if (b === 'El Segundo') return 1;
+        
+        // Check if locations are in California
+        const aIsCA = a.endsWith(', CA');
+        const bIsCA = b.endsWith(', CA');
+        
+        if (aIsCA && !bIsCA) return -1;
+        if (!aIsCA && bIsCA) return 1;
+        
+        // If both are in CA, sort alphabetically
+        if (aIsCA && bIsCA) {
+            return a.localeCompare(b);
+        }
+        
+        // Austin, TX comes next
+        if (a === 'Austin, TX') return -1;
+        if (b === 'Austin, TX') return 1;
+        
+        // All other locations sorted alphabetically
+        return a.localeCompare(b);
+    });
+}
+
+function populateLocationFilter(locations) {
+    const filter = document.getElementById('locationFilter');
+    filter.innerHTML = `
+        <option value="all">All Locations</option>
+        ${locations.map(location => `<option value="${location}">${location}</option>`).join('')}
+    `;
+}
+
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -36,7 +73,9 @@ function shuffleArray(array) {
 function createCompanyCard(company) {
     return `
         <div class="company-card">
-            <img src="${company.logo}" alt="${company.name} logo" class="company-logo">
+            <div class="logo-container">
+                <img src="${company.logo}" alt="${company.name} logo" class="company-logo">
+            </div>
             <div class="company-info">
                 <h3 class="company-name">${company.name}</h3>
                 <p class="company-details">${company.focus} • ${company.location}</p>
@@ -65,6 +104,8 @@ function filterCompanies(location, companies) {
 // Initialize
 document.addEventListener('DOMContentLoaded', async () => {
     const companies = await fetchCompaniesData();
+    const locations = getSortedLocations(companies);
+    populateLocationFilter(locations);
     renderCompanies(shuffleArray([...companies]));
     
     document.getElementById('locationFilter').addEventListener('change', (e) => {
